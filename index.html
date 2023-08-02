@@ -7,7 +7,19 @@
     </head>
     <body>
         <div class="header">HTML to YAML Converter</div>
-        
+
+        <div class="forms">
+            <form id="htmlForm">
+                <textarea id="htmlInput" rows="20" cols="80"></textarea>
+                <button id="convertButton" type="button" onclick="convertToYAML()">Convert to YAML</button>
+            </form>
+
+            <form id="yamlForm">
+                <textarea id="yamlOutput" rows="20" cols="80" readonly></textarea>
+            </form>
+        </div>
+
+        <script src="scripts/converter.js"></script>
     </body>
 
 </html>
