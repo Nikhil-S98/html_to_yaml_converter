@@ -1,1 +1,6 @@
-function convertToYAML()
+function convertToYAML() {
+}
+
+function convertHTMLToYAML(htmlInput) {
+
+}
