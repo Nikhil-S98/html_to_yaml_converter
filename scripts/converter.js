@@ -27,19 +27,28 @@ function converter(htmlInput) {
         headerValues.push(headers[i].textContent);
     }
 
-    //Select rows from the table and crate an array of rows
-    const rows = table.querySelectorAll("tbody tr");
-    rowArrays = [];
+    //Select rows from the table body
+    let rows = table.querySelectorAll("tbody tr");
 
-    //Create an array for each row and push it back into rowArrays
-    for (let i = 0; i < rows.length; i++) {
-        const cells = rows[i].querySelectorAll("td");
-        const rowValues = [];
+    //Create an array to store the row objects and one to store cell values
+    let rowObjects = [];
+    let cellValues = [];
 
-        for (let j = 0; j < cells.length; j++) {
-            rowValues.push(cells[j].textContent);
+    //Loop through the rows and store the cell values in the cellValues array
+    //For every iteration, create a new object
+    for (let i=0; i < rows.length; i++) {
+        cellValues = rows[i].querySelectorAll("td");
+        let data = {};
+
+        //nested for loop to create and store key-value pairs in the data object out of headers and individual cell values
+        for (let j=0; j < cellValues.length; j++) {
+            data[headerValues[j]] = cellValues[j].textContent;
         }
+    //Push the data object into the rowObjects array to prep for yaml conversion
+    rowObjects.push(data);
+    }
 
-        rowArrays.push(rowValues);
-    }   
+    //Convert the rowObjects array into yaml strings and return yaml output
+    const yamlOutput = jsyaml.dump(rowObjects);
+    return yamlOutput;
 }
